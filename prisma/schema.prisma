@@ -1,0 +1,116 @@
+generator client { provider = "prisma-client-js" }
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+
+enum Role { USER ADMIN }
+enum Availability { IN_STOCK LOW_STOCK OUT_OF_STOCK UNKNOWN }
+
+model User {
+  id           String       @id @default(cuid())
+  email        String       @unique
+  passwordHash String
+  role         Role         @default(USER)
+  saved        SavedProduct[]
+  alerts       PriceAlert[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Brand {
+  id       String    @id @default(cuid())
+  name     String    @unique
+  products Product[]
+}
+
+model Retailer {
+  id           String         @id @default(cuid())
+  name         String         @unique
+  website      String
+  products     ProductPrice[]
+  integrations RetailerIntegration[]
+}
+
+model Product {
+  id             String          @id @default(cuid())
+  slug           String          @unique
+  brandId        String
+  brand          Brand           @relation(fields: [brandId], references: [id])
+  model          String
+  name           String
+  sizeInches     Int
+  resolution     String
+  panelTechnology String
+  refreshRate    Int
+  platform       String?
+  energyRating   String?
+  verified       Boolean         @default(false)
+  source         String?
+  lastVerifiedAt DateTime?
+  prices         ProductPrice[]
+  saved          SavedProduct[]
+  alerts         PriceAlert[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model ProductPrice {
+  id             String       @id @default(cuid())
+  productId      String
+  product        Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+  retailerId     String
+  retailer       Retailer     @relation(fields: [retailerId], references: [id])
+  pricePence     Int
+  previousPence  Int?
+  currency       String       @default("GBP")
+  sourceUrl      String
+  availability   Availability @default(UNKNOWN)
+  delivery       String?
+  verified       Boolean      @default(false)
+  checkedAt      DateTime     @default(now())
+  @@index([productId, retailerId, checkedAt])
+}
+
+model SavedProduct {
+  userId    String
+  productId String
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  @@id([userId, productId])
+}
+
+model PriceAlert {
+  id          String   @id @default(cuid())
+  userId      String
+  productId   String
+  targetPence Int
+  active      Boolean  @default(true)
+  triggeredAt DateTime?
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  @@index([active, targetPence])
+}
+
+model RetailerIntegration {
+  id         String   @id @default(cuid())
+  retailerId String
+  retailer   Retailer @relation(fields: [retailerId], references: [id], onDelete: Cascade)
+  kind       String
+  enabled    Boolean  @default(false)
+  config     Json
+  lastRunAt  DateTime?
+  lastError  String?
+}
+
+model ImportJob {
+  id          String   @id @default(cuid())
+  source      String
+  status      String   @default("queued")
+  recordsRead Int      @default(0)
+  recordsSaved Int     @default(0)
+  error       String?
+  startedAt   DateTime?
+  finishedAt  DateTime?
+  createdAt   DateTime @default(now())
+}
+
