@@ -46,3 +46,26 @@ Never commit secrets. Add `.env*` to `.gitignore` before connecting live service
 ## Known limitations
 
 The UI now supports local accounts, local target-price alerts and retailer search links. The catalogue still uses sample data because live prices and stock require approved retailer APIs, affiliate feeds or permitted imports; the retailer URLs currently open search pages rather than affiliate product links. Local accounts are browser-only and are not suitable for production authentication. The next production step is to replace the local storage adapter with a PostgreSQL API and a managed identity provider, then add compliant feed adapters and an email/notification worker.
+
+## Production backend foundation
+
+The repository now includes a TypeScript/Express backend foundation:
+
+- `prisma/schema.prisma` models users, roles, products, retailers, prices, saved products, alerts, integrations and import jobs.
+- `server/src/index.ts` provides health, registration, login, retailer-sync and price-alert endpoints.
+- Passwords are hashed with Argon2 and API sessions use signed JWTs. Replace the development secret before deployment.
+- `server/src/integrations/retailers.ts` defines a replaceable JSON-feed adapter. Add one adapter per approved retailer API or affiliate feed.
+- `server/src/workers/price-alert-worker.ts` checks current prices and sends email through SMTP when configured.
+
+To initialise the backend:
+
+```powershell
+npm install
+Copy-Item .env.example .env
+npm run db:generate
+npm run db:migrate
+npm run dev
+```
+
+The API runs on `http://localhost:8787`. The frontend remains static until its local-storage calls are replaced with authenticated API calls. Do not enable retailer sync until the feed terms, credentials and field mapping have been reviewed.
+
