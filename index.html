@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071b2f" />
+    <meta name="description" content="ScreenScout helps UK shoppers compare television prices, specifications and retailer availability." />
+    <title>ScreenScout — Find your next TV</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="notice"><span>Prices checked daily</span><span>UK retailers only</span><span>Independent comparisons</span></div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="ScreenScout home"><span class="brand-mark">S</span><span>Screen<span class="brand-accent">Scout</span></span></a>
+      <nav class="desktop-nav" aria-label="Primary navigation"><a href="#results">Browse TVs</a><a href="#compare">Compare</a><a href="#watchlist">Watchlist <span id="saved-count" class="nav-count">0</span></a></nav>
+      <div class="header-actions"><button class="icon-btn" id="theme-btn" title="Toggle colour theme" aria-label="Toggle colour theme">☼</button><button class="account-btn" id="login-btn">Sign in</button><button class="menu-btn" id="menu-btn" aria-label="Open menu">☰</button></div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="pulse"></span> Your shortcut to a better picture</div>
+          <h1>Find a TV you’ll<br /><em>love to watch.</em></h1>
+          <p>Compare the latest 4K, OLED, QLED and Mini LED televisions from the UK’s most trusted retailers.</p>
+          <form class="hero-search" id="search-form"><span class="search-icon">⌕</span><input id="hero-search-input" type="search" placeholder="Try “55 inch OLED under £1,000”" autocomplete="off" /><button type="submit">Search TVs <span>→</span></button></form>
+          <div class="search-hints"><span>Popular:</span><button data-query="OLED">OLED</button><button data-query="55 inch">55 inch</button><button data-query="gaming">Gaming TVs</button><button data-query="under £500">Under £500</button></div>
+        </div>
+        <div class="hero-art" aria-hidden="true"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-tv"><div class="hero-screen"><div class="screen-glow"></div><div class="screen-label">CINEMA<br /><small>AT HOME</small></div></div><div class="tv-neck"></div><div class="tv-base"></div></div><div class="hero-badge"><strong>£749</strong><span>best value<br />this week</span></div></div>
+      </section>
+
+      <section class="trust-row"><div><strong>2,400+</strong><span>TVs compared</span></div><div><strong>12</strong><span>UK retailers</span></div><div><strong>Daily</strong><span>price updates</span></div><div><strong>100%</strong><span>independent</span></div></section>
+
+      <section class="content-wrap" id="results">
+        <div class="section-heading"><div><div class="eyebrow">THE SHORTLIST</div><h2>Find your perfect screen</h2></div><button class="text-btn" id="clear-filters">Clear all filters <span>↗</span></button></div>
+        <div class="active-filters" id="active-filters"></div>
+        <div class="browse-layout">
+          <aside class="filters" id="filters-panel"><div class="filter-head"><h3>Filter TVs</h3><button class="close-filters" id="close-filters">×</button></div>
+            <label class="filter-label">Search within results<input id="filter-search" type="search" placeholder="Brand, model or feature" /></label>
+            <div class="filter-group"><div class="filter-title">Price range <span>GBP</span></div><div class="price-inputs"><label>Min<input id="min-price" type="number" placeholder="£0" min="0" /></label><span>—</span><label>Max<input id="max-price" type="number" placeholder="£2,500" min="0" /></label></div></div>
+            <div class="filter-group"><div class="filter-title">Screen size</div><div class="check-grid" id="size-filters"><label><input type="checkbox" value="43"> 43–50”</label><label><input type="checkbox" value="55"> 55”</label><label><input type="checkbox" value="65"> 65”</label><label><input type="checkbox" value="75"> 75”+</label></div></div>
+            <div class="filter-group"><div class="filter-title">Brand</div><div class="check-stack" id="brand-filters"><label><input type="checkbox" value="Samsung"> Samsung <small>24</small></label><label><input type="checkbox" value="LG"> LG <small>18</small></label><label><input type="checkbox" value="Sony"> Sony <small>16</small></label><label><input type="checkbox" value="Hisense"> Hisense <small>21</small></label><label><input type="checkbox" value="TCL"> TCL <small>14</small></label></div></div>
+            <div class="filter-group"><div class="filter-title">Panel technology</div><div class="chip-grid" id="tech-filters"><button data-value="OLED">OLED</button><button data-value="QLED">QLED</button><button data-value="Mini LED">Mini LED</button><button data-value="LED">LED</button></div></div>
+            <div class="filter-group"><div class="filter-title">Retailer</div><div class="check-stack" id="retailer-filters"><label><input type="checkbox" value="Currys"> Currys</label><label><input type="checkbox" value="John Lewis"> John Lewis</label><label><input type="checkbox" value="Amazon UK"> Amazon UK</label><label><input type="checkbox" value="AO"> AO</label></div></div>
+            <div class="filter-group"><div class="filter-title">Features</div><div class="check-stack" id="feature-filters"><label><input type="checkbox" value="Dolby Vision"> Dolby Vision</label><label><input type="checkbox" value="HDMI 2.1"> HDMI 2.1</label><label><input type="checkbox" value="Gaming"> Gaming mode</label><label><input type="checkbox" value="120Hz"> 120Hz refresh rate</label></div></div>
+          </aside>
+          <div class="results-area"><div class="results-toolbar"><div><button class="mobile-filter-btn" id="open-filters">☷ Filters</button><span id="result-count">8 TVs found</span></div><div class="toolbar-right"><select id="sort-select" aria-label="Sort results"><option value="relevance">Most relevant</option><option value="price-low">Lowest price</option><option value="price-high">Highest price</option><option value="value">Best value</option><option value="size">Largest screen</option><option value="rating">Top rated</option></select><div class="view-toggle"><button class="active" id="grid-view" aria-label="Grid view">▦</button><button id="list-view" aria-label="List view">☷</button></div></div></div><div class="product-grid" id="product-grid"></div><div class="empty-state" id="empty-state" hidden><div>⌕</div><h3>No TVs match those filters</h3><p>Try widening your price range or removing a filter.</p><button class="primary-btn" id="empty-clear">Clear filters</button></div></div>
+        </div>
+      </section>
+
+      <section class="compare-section" id="compare"><div class="section-heading"><div><div class="eyebrow">MAKE THE CALL</div><h2>Compare side by side</h2><p class="section-sub">Add up to four TVs to see what really sets them apart.</p></div><span class="compare-count" id="compare-count">0 / 4 selected</span></div><div class="comparison-table-wrap" id="comparison-table-wrap"><div class="compare-empty"><div class="compare-icon">＋</div><h3>Your comparison is waiting</h3><p>Add TVs from the shortlist above to start comparing.</p><a href="#results">Browse TVs <span>→</span></a></div></div></section>
+
+      <section class="watch-section" id="watchlist"><div class="watch-copy"><div class="eyebrow">KEEP AN EYE ON IT</div><h2>Save now.<br /><em>Buy when ready.</em></h2><p>Save your favourites and we’ll keep them in one place. Price alerts are coming soon.</p><button class="outline-btn" id="watch-browse">Browse the shortlist <span>→</span></button></div><div class="watch-visual"><div class="watch-card"><span class="watch-star">★</span><div class="mini-line"></div><div class="mini-line short"></div><div class="watch-price">£749 <span>↓ 12%</span></div></div><div class="watch-card back"><span class="watch-star">★</span><div class="mini-line"></div><div class="mini-line short"></div><div class="watch-price">£1,099 <span>↓ 8%</span></div></div></div></section>
+    </main>
+    <footer><a class="brand" href="#top"><span class="brand-mark">S</span><span>Screen<span class="brand-accent">Scout</span></span></a><p>Independent TV comparisons for UK shoppers.</p><div class="footer-links"><a href="#">About</a><a href="#">Privacy</a><a href="#">Retailer disclaimer</a><span>© 2026 ScreenScout</span></div></footer>
+
+    <div class="compare-tray" id="compare-tray" hidden><div><strong id="tray-title">Ready to compare?</strong><span id="tray-items">Add TVs from the results</span></div><button id="tray-compare">View comparison <span>→</span></button><button class="tray-close" id="tray-close" aria-label="Close">×</button></div>
+    <div class="modal-backdrop" id="modal-backdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"><button class="modal-close" id="modal-close">×</button><div id="modal-content"></div></div></div>
+    <script src="app.js"></script>
+    <script src="enhance.js"></script>
+  </body>
+</html>
