@@ -12,7 +12,7 @@ ScreenScout is a polished, UK-focused TV comparison MVP. It is currently a depen
 - Compare up to four TVs with highlighted lowest price and highest rating
 - Product detail modal with specs, retailer data disclaimer and actions
 - Responsive mobile layout and accessible labels/focusable controls
-- Sign-in placeholder with explicit production authentication guidance
+- Local sign-in/account flow with explicit production authentication guidance
 - Local account creation/sign-in state stored in the browser
 - Local target-price alerts stored per product
 - Functional retailer search links for Currys, John Lewis, Amazon UK and AO
