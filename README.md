@@ -13,6 +13,9 @@ ScreenScout is a polished, UK-focused TV comparison MVP. It is currently a depen
 - Product detail modal with specs, retailer data disclaimer and actions
 - Responsive mobile layout and accessible labels/focusable controls
 - Sign-in placeholder with explicit production authentication guidance
+- Local account creation/sign-in state stored in the browser
+- Local target-price alerts stored per product
+- Functional retailer search links for Currys, John Lewis, Amazon UK and AO
 
 ## Run locally
 
@@ -42,4 +45,4 @@ Never commit secrets. Add `.env*` to `.gitignore` before connecting live service
 
 ## Known limitations
 
-The included catalogue is mock data, accounts are UI-only, price alerts are not sent, and retailer buttons are not wired to affiliate URLs. These are intentional seams for the next implementation phase.
+The UI now supports local accounts, local target-price alerts and retailer search links. The catalogue still uses sample data because live prices and stock require approved retailer APIs, affiliate feeds or permitted imports; the retailer URLs currently open search pages rather than affiliate product links. Local accounts are browser-only and are not suitable for production authentication. The next production step is to replace the local storage adapter with a PostgreSQL API and a managed identity provider, then add compliant feed adapters and an email/notification worker.
